@@ -37,12 +37,6 @@ export default function Navbar() {
               Home
             </Link>
             <Link 
-              to="/test" 
-              className="hover:text-blue-600 transition-colors duration-200 hover:scale-105"
-            >
-              Test
-            </Link>
-            <Link 
               to="/explore" 
               className="hover:text-blue-600 transition-colors duration-200 hover:scale-105"
             >
