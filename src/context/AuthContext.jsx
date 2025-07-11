@@ -2,15 +2,19 @@
 import { createContext, useEffect, useState } from "react";
 import { axiosInstance } from "../lib/axios";
 
+// 1. Create the context
 export const AuthContext = createContext(null);
 
+// 2. Create the provider component
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const checkAuth = async () => {
     try {
-      const response = await axiosInstance.get("/auth/check");
+      const response = await axiosInstance.get("/auth/check", {
+        withCredentials: true,
+      });
       setUser(response.data);
     } catch (error) {
       setUser(null);
@@ -20,31 +24,14 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const login = async (credentials) => {
-    try {
-      const response = await axiosInstance.post("/auth/login", credentials);
-      setUser(response.data);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const logout = async () => {
-    try {
-      await axiosInstance.post("/auth/logout");
-      setUser(null);
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
-  };
-
   useEffect(() => {
     checkAuth();
   }, []);
 
+  if (loading) return <div>Loading...</div>;
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, checkAuth }}>
+    <AuthContext.Provider value={{ user, setUser, checkAuth }}>
       {children}
     </AuthContext.Provider>
   );
