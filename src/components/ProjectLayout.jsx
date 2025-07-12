@@ -3,13 +3,8 @@ import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { axiosInstance } from '../lib/axios';
 import { 
-  FiHome, 
-  FiCheckSquare, 
-  FiUsers, 
-  FiFile, 
-  FiMessageSquare,
-  FiSettings,
-  FiArrowLeft
+  FiHome, FiCheckSquare, FiUsers, FiFile, 
+  FiMessageSquare, FiSettings, FiArrowLeft 
 } from 'react-icons/fi';
 
 const ProjectLayout = ({ children }) => {
@@ -47,60 +42,49 @@ const ProjectLayout = ({ children }) => {
 
   const isActiveRoute = (itemPath) => {
     const currentPath = location.pathname.split('/').pop();
-    if (itemPath === '' && (currentPath === projectId || location.pathname === `/projects/${projectId}`)) {
-      return true;
-    }
-    return currentPath === itemPath;
+    return (itemPath === '' && currentPath === projectId) || currentPath === itemPath;
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
-      {/* Mobile Header */}
-      <header className="md:hidden bg-white border-b border-gray-200 p-4 flex items-center justify-between">
-        <button 
-          onClick={() => navigate('/')}
-          className="p-2 rounded-md hover:bg-gray-100"
-        >
-          <FiArrowLeft className="w-5 h-5" />
-        </button>
-        <h1 className="text-lg font-semibold truncate mx-2">{project?.title}</h1>
-        <div className="w-8"></div> {/* Spacer for balance */}
-      </header>
+    <>
+      {/* Mobile Layout (shows only on small screens) */}
+      <div className="md:hidden flex flex-col h-screen bg-gray-50">
+        <header className="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+          <button onClick={() => navigate('/')} className="p-2 rounded-md hover:bg-gray-100">
+            <FiArrowLeft className="w-5 h-5" />
+          </button>
+          <h1 className="text-lg font-semibold truncate mx-2">{project?.title}</h1>
+          <div className="w-8"></div>
+        </header>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto p-4 md:p-6">
-        {children}
-      </main>
+        <main className="flex-1 overflow-auto p-4">
+          {children}
+        </main>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden bg-white border-t border-gray-200 py-2 px-1 overflow-x-auto">
-        <div className="flex space-x-1 min-w-max">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={`/projects/${projectId}/${item.path}`}
-              className={`flex flex-col items-center p-2 rounded-md min-w-[4rem] ${
-                isActiveRoute(item.path)
-                  ? 'text-blue-600'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <span className="mb-1">{item.icon}</span>
-              <span className="text-xs truncate">{item.name}</span>
-            </Link>
-          ))}
-        </div>
-      </nav>
+        <nav className="bg-white border-t border-gray-200 py-2 px-1 overflow-x-auto">
+          <div className="flex space-x-1 min-w-max">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={`/projects/${projectId}/${item.path}`}
+                className={`flex flex-col items-center p-2 rounded-md min-w-[4rem] ${
+                  isActiveRoute(item.path) ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {item.icon}
+                <span className="text-xs truncate">{item.name}</span>
+              </Link>
+            ))}
+          </div>
+        </nav>
+      </div>
 
-      {/* Desktop Sidebar (hidden on mobile) */}
+      {/* Desktop Layout (shows only on medium+ screens) */}
       <div className="hidden md:flex h-screen overflow-hidden bg-gray-50">
         <div className="relative bg-white border-r border-gray-200 w-64 flex-shrink-0 overflow-y-auto">
-          {/* Desktop Sidebar Content */}
           <div className="p-4 border-b border-gray-200 sticky top-0 bg-white z-10">
-            <div className="flex-1 min-w-0">
-              <h2 className="text-lg font-semibold truncate">{project?.title}</h2>
-              <p className="text-xs text-gray-500 truncate">{project?.status}</p>
-            </div>
+            <h2 className="text-lg font-semibold truncate">{project?.title}</h2>
+            <p className="text-xs text-gray-500 truncate">{project?.status}</p>
           </div>
           <nav className="p-2">
             <ul className="space-y-1">
@@ -109,9 +93,7 @@ const ProjectLayout = ({ children }) => {
                   <Link
                     to={`/projects/${projectId}/${item.path}`}
                     className={`flex items-center px-4 py-3 rounded transition-colors duration-200 ${
-                      isActiveRoute(item.path)
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-gray-700 hover:bg-gray-100'
+                      isActiveRoute(item.path) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
                     <span className="mr-3">{item.icon}</span>
@@ -124,7 +106,7 @@ const ProjectLayout = ({ children }) => {
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white">
             <button
               onClick={() => navigate('/')}
-              className="flex items-center w-full p-2 px-3 rounded-md hover:bg-gray-100 text-gray-700 transition-colors duration-200"
+              className="flex items-center w-full p-2 px-3 rounded-md hover:bg-gray-100 text-gray-700"
             >
               <FiArrowLeft className="w-5 h-5" />
               <span className="ml-3">Back to Home</span>
@@ -135,7 +117,7 @@ const ProjectLayout = ({ children }) => {
           {children}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
