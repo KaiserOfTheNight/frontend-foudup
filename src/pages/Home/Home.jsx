@@ -61,13 +61,13 @@ export default function Home() {
                   <span className="text-sm sm:text-base text-gray-600">Turn vision into a funded startup together</span>
                 </div>
               </div>
-              <button 
+              <Link to={"/projects/create"} 
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium px-6 py-3 md:px-8 md:py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg transform hover:scale-105"
               >
                 <Rocket className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="text-sm sm:text-base">Start Your Project</span>
                 <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              </button>
+              </Link>
             </div>
             
             {/* I want to join a project */}
@@ -90,13 +90,13 @@ export default function Home() {
                   <span className="text-sm sm:text-base text-gray-600">Make a difference in new team from day one</span>
                 </div>
               </div>
-              <button 
+              <Link to={"/explore"} 
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium px-6 py-3 md:px-8 md:py-4 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg transform hover:scale-105"
               >
                 <Users className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="text-sm sm:text-base">Browse Projects</span>
                 <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
