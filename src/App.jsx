@@ -10,14 +10,13 @@ import ProtectedRoute from './middleware/ProtectedRoute';
 import Projects from './pages/project/Projects';
 import CreateProject from './pages/project/CreateProject';
 import Project from './pages/Project';
-import Dashboard from './pages/project/Dashboard';
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Navbar />
-        <main className="pt-16">
+        <main className="pt-14">
           <Routes>
             <Route path="/register" element={<SignUp />} />
             <Route path="/login" element={<Login />} />

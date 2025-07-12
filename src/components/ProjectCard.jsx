@@ -28,7 +28,18 @@ const ProjectCard = ({ project }) => {
   const isMyProject = user && project.createdBy._id === user._id;
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-200 hover:shadow-lg">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-200 hover:shadow-lg w-full">
+      {/* Image section - shows placeholder if no image exists */}
+      {project.image ? (
+        <div className="w-full h-32 overflow-hidden">
+          <img 
+            src={project.image} 
+            alt={project.title || 'Project image'} 
+            className="w-full h-full object-cover"
+          />
+        </div>
+      ) : null}
+
       <div className="p-5">
         {/* Title and Status row */}
         <div className="flex justify-between items-start mb-2">
@@ -101,13 +112,12 @@ const ProjectCard = ({ project }) => {
                        {member.roles?.map((role, i) => (
                         <span 
                           key={i} 
-                          className={`px-2 py-0.5 text-xs rounded-full font-medium ${roleColors[role] || 'bg-gray-200'}`}
+                          className={`ml-2 px-2 py-0.5 text-xs rounded-full font-medium ${roleColors[role] || 'bg-gray-200'}`}
                         >
                           {role.toUpperCase()}
                         </span>
                       ))}
                     </p>
-                     
                   </div>
                 </div>
               ))}

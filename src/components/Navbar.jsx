@@ -23,22 +23,25 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="w-full bg-white border-b fixed z-50 shadow-sm">
-        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-          <Link to="/" className="font-bold text-xl text-blue-600 hover:text-blue-800 transition-colors duration-200">
-            SAAS
+      <nav className="w-full bg-white/80 border-b border-gray-100 fixed z-50 backdrop-blur-lg">
+        <div className="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
+          <Link 
+            to="/" 
+            className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+          >
+            FoundUp
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
             <Link 
               to="/" 
-              className="hover:text-blue-600 transition-colors duration-200 hover:scale-105"
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 hover:scale-105 font-medium"
             >
               Home
             </Link>
             <Link 
               to="/explore" 
-              className="hover:text-blue-600 transition-colors duration-200 hover:scale-105"
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 hover:scale-105 font-medium"
             >
               Explore
             </Link>
@@ -47,13 +50,13 @@ export default function Navbar() {
               <>
                 <Link 
                   to="/profile" 
-                  className="hover:text-blue-600 transition-colors duration-200 hover:scale-105"
+                  className="text-gray-700 hover:text-blue-600 transition-colors duration-200 hover:scale-105 font-medium"
                 >
                   Profile
                 </Link>
                 <button 
                   onClick={handleLogout}
-                  className="hover:text-blue-600 transition-colors duration-200 flex items-center gap-1 hover:scale-105"
+                  className="text-gray-700 hover:text-blue-600 transition-colors duration-200 flex items-center gap-1 hover:scale-105 font-medium"
                 >
                   <LogOut size={16} /> Logout
                 </button>
@@ -62,15 +65,15 @@ export default function Navbar() {
               <>
                 <Link 
                   to="/login" 
-                  className="hover:text-blue-600 transition-colors duration-200 hover:scale-105"
+                  className="text-gray-700 hover:text-blue-600 transition-colors duration-200 hover:scale-105 font-medium"
                 >
                   Login
                 </Link>
                 <Link 
                   to="/register" 
-                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-200 transform hover:scale-105"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-medium"
                 >
-                  Sign Up
+                  Join FoundUp
                 </Link>
               </>
             )}
@@ -89,22 +92,24 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <>
-          {/* Overlay */}
+          {/* Overlay with blur effect */}
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-[60] md:hidden transition-opacity duration-300 ease-in-out"
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[60] md:hidden transition-opacity duration-300 ease-in-out"
             onClick={() => setMobileMenuOpen(false)}
           />
           
-          {/* Sidebar */}
+          {/* Sidebar with glass morphism effect */}
           <div 
-            className="fixed top-0 right-0 h-full w-64 bg-white z-[70] shadow-lg flex flex-col transform transition-transform duration-300 ease-in-out"
+            className="fixed top-0 right-0 h-full w-64 bg-white/90 backdrop-blur-lg z-[70] shadow-xl flex flex-col transform transition-transform duration-300 ease-in-out border-l border-gray-200"
             style={{ transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)' }}
           >
-            <div className="p-4 border-b flex justify-between items-center">
-              <span className="font-bold text-blue-600">SAAS</span>
+            <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+              <span className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                FoundUp
+              </span>
               <button 
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100"
               >
                 <X size={24} />
               </button>
@@ -113,22 +118,22 @@ export default function Navbar() {
             <div className="flex-grow p-4 space-y-2">
               <Link 
                 to="/" 
-                className="block p-3 hover:bg-gray-100 rounded transition-colors duration-200 hover:translate-x-1"
+                className="block p-3 hover:bg-gray-100/50 rounded-lg transition-all duration-200 hover:translate-x-1 group"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <div className="flex items-center gap-3">
-                  <Home className="h-5 w-5 text-blue-500" />
-                  <span>Home</span>
+                  <Home className="h-5 w-5 text-blue-500 group-hover:text-blue-600" />
+                  <span className="text-gray-700 group-hover:text-blue-600 font-medium">Home</span>
                 </div>
               </Link>
               <Link 
-                to="/test" 
-                className="block p-3 hover:bg-gray-100 rounded transition-colors duration-200 hover:translate-x-1"
+                to="/explore" 
+                className="block p-3 hover:bg-gray-100/50 rounded-lg transition-all duration-200 hover:translate-x-1 group"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <div className="flex items-center gap-3">
-                  <ChevronRight className="h-5 w-5 text-blue-500" />
-                  <span>Test</span>
+                  <ChevronRight className="h-5 w-5 text-blue-500 group-hover:text-blue-600" />
+                  <span className="text-gray-700 group-hover:text-blue-600 font-medium">Explore</span>
                 </div>
               </Link>
 
@@ -136,12 +141,12 @@ export default function Navbar() {
                 <>
                   <Link 
                     to="/profile" 
-                    className="block p-3 hover:bg-gray-100 rounded transition-colors duration-200 hover:translate-x-1"
+                    className="block p-3 hover:bg-gray-100/50 rounded-lg transition-all duration-200 hover:translate-x-1 group"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <div className="flex items-center gap-3">
-                      <User className="h-5 w-5 text-blue-500" />
-                      <span>Profile</span>
+                      <User className="h-5 w-5 text-blue-500 group-hover:text-blue-600" />
+                      <span className="text-gray-700 group-hover:text-blue-600 font-medium">Profile</span>
                     </div>
                   </Link>
                   <button
@@ -149,30 +154,30 @@ export default function Navbar() {
                       handleLogout();
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full text-left p-3 hover:bg-gray-100 rounded flex items-center gap-3 transition-colors duration-200 hover:translate-x-1"
+                    className="w-full text-left p-3 hover:bg-gray-100/50 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1 group"
                   >
-                    <LogOut className="h-5 w-5 text-blue-500" />
-                    <span>Logout</span>
+                    <LogOut className="h-5 w-5 text-blue-500 group-hover:text-blue-600" />
+                    <span className="text-gray-700 group-hover:text-blue-600 font-medium">Logout</span>
                   </button>
                 </>
               ) : (
                 <>
                   <Link 
                     to="/login" 
-                    className="block p-3 hover:bg-gray-100 rounded transition-colors duration-200 hover:translate-x-1"
+                    className="block p-3 hover:bg-gray-100/50 rounded-lg transition-all duration-200 hover:translate-x-1 group"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <div className="flex items-center gap-3">
-                      <User className="h-5 w-5 text-blue-500" />
-                      <span>Login</span>
+                      <User className="h-5 w-5 text-blue-500 group-hover:text-blue-600" />
+                      <span className="text-gray-700 group-hover:text-blue-600 font-medium">Login</span>
                     </div>
                   </Link>
                   <Link 
                     to="/register" 
-                    className="block p-3 bg-blue-600 text-white rounded text-center mt-4 hover:bg-blue-700 transition-colors duration-200 transform hover:scale-105"
+                    className="block p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl text-center mt-4 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl font-medium"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Sign Up
+                    Join FoundUp
                   </Link>
                 </>
               )}
